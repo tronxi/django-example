@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from users.persistence.custom_user import CustomUser
@@ -28,6 +29,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             bio=validated_data['bio'],
         )
+
+        group, created = Group.objects.get_or_create(name="OPERATOR")
+        user.groups.add(group)
 
         user.set_password(validated_data['password'])
         user.save()

@@ -7,5 +7,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
         token['username'] = user.username
         token['email'] = user.email
+        roles = []
+        for group in user.groups.all():
+            roles.append(group.name)
+
+        token['roles'] = roles
         return token
-    
