@@ -1,22 +1,24 @@
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from movies.persistence.movie_serializer import MovieSerializer
+from movies.use_cases.delete_movie_use_case import DeleteMovieUseCase
 from movies.use_cases.retrieve_movies_use_case import RetrieveMoviesUseCase
+from users.permissions.is_admin_permission import IsAdminPermission
 
 
 class MovieAPIView(APIView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.retrieveMoviesUseCase = RetrieveMoviesUseCase()
+        self.deleteMovieUseCase = DeleteMovieUseCase()
 
     def get_permissions(self):
         if self.request.method == 'GET':
             return [IsAuthenticated()]
-        elif self.request.method == 'POST':
-            return [AllowAny()]
+        if self.request.method == 'DELETE':
+            return [IsAuthenticated(), IsAdminPermission()]
         else:
             return [IsAuthenticated()]
 
@@ -24,6 +26,10 @@ class MovieAPIView(APIView):
         movie = self.retrieveMoviesUseCase.retrieveById(pk)
         serializer = MovieSerializer(movie)
         return Response(serializer.data)
+
+    def delete(self, request, pk):
+        self.deleteMovieUseCase.deleteById(pk)
+        return Response()
 
 
 class MovieListAPIView(APIView):
