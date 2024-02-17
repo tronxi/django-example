@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  django-example-postgresql:
+    container_name: django-example-postgresql
+    image: postgres:14.5
+    env_file: .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+    networks:
+      - django_example-net
+
+networks:
+  django_example-net:
