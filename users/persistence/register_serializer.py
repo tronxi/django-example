@@ -4,8 +4,7 @@ from users.persistence.custom_user import CustomUser
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(
-        write_only=True, required=True)
+    password = serializers.CharField(write_only=True, required=True)
     password2 = serializers.CharField(write_only=True, required=True)
     email = serializers.EmailField(
         required=True,
