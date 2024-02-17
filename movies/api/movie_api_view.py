@@ -1,3 +1,5 @@
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -9,6 +11,14 @@ class MovieAPIView(APIView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.retrieveMoviesUseCase = RetrieveMoviesUseCase()
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        elif self.request.method == 'POST':
+            return [AllowAny()]
+        else:
+            return [IsAuthenticated()]
 
     def get(self, request, pk):
         movie = self.retrieveMoviesUseCase.retrieveById(pk)
