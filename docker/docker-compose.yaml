@@ -10,6 +10,18 @@ services:
       - ./postgresql:/var/lib/postgresql/data
     networks:
       - django_example-net
+  django-example-rabbit-stomp:
+    container_name: django-example-rabbit-stomp
+    image: django-example-rabbit-stomp
+    build:
+      dockerfile: rabbitmq.Dockerfile
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "61613:61613"
+    env_file: .env
+    networks:
+      - django_example-net
 
 networks:
   django_example-net:
