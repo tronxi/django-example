@@ -92,8 +92,11 @@ MIDDLEWARE = [
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": ["redis://:django_example_password@localhost:6379"]
+        },
+    },
 }
 
 ROOT_URLCONF = 'django_example.urls'
