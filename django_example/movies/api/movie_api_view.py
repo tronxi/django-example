@@ -2,6 +2,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from django_example.movies.emitters.movie_emitter import MovieEmitter
 from django_example.movies.persistence.movie_serializer import MovieSerializer
 from django_example.movies.use_cases.delete_movie_use_case import DeleteMovieUseCase
 from django_example.movies.use_cases.retrieve_movies_use_case import RetrieveMoviesUseCase
@@ -13,6 +14,7 @@ class MovieAPIView(APIView):
         super().__init__(**kwargs)
         self.retrieveMoviesUseCase = RetrieveMoviesUseCase()
         self.deleteMovieUseCase = DeleteMovieUseCase()
+        self.movie_emitter = MovieEmitter()
 
     def get_permissions(self):
         if self.request.method == 'GET':
@@ -25,6 +27,7 @@ class MovieAPIView(APIView):
     def get(self, request, pk):
         movie = self.retrieveMoviesUseCase.retrieveById(pk)
         serializer = MovieSerializer(movie)
+        self.movie_emitter.emit(serializer.data)
         return Response(serializer.data)
 
     def delete(self, request, pk):
@@ -36,8 +39,10 @@ class MovieListAPIView(APIView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.retrieveMoviesUseCase = RetrieveMoviesUseCase()
+        self.movie_emitter = MovieEmitter()
 
     def get(self, request):
         movies = self.retrieveMoviesUseCase.retrieveAll()
         serializer = MovieSerializer(movies, many=True)
+        self.movie_emitter.emit(serializer.data)
         return Response(serializer.data)

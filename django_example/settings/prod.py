@@ -29,6 +29,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,6 +90,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
 ROOT_URLCONF = 'django_example.urls'
 
 TEMPLATES = [
@@ -114,6 +122,7 @@ REST_FRAMEWORK = {
 }
 
 WSGI_APPLICATION = 'django_example.wsgi.application'
+ASGI_APPLICATION = 'django_example.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
