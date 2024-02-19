@@ -2,10 +2,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from movies.persistence.movie_serializer import MovieSerializer
-from movies.use_cases.delete_movie_use_case import DeleteMovieUseCase
-from movies.use_cases.retrieve_movies_use_case import RetrieveMoviesUseCase
-from users.permissions.is_admin_permission import IsAdminPermission
+from django_example.movies.persistence.movie_serializer import MovieSerializer
+from django_example.movies.use_cases.delete_movie_use_case import DeleteMovieUseCase
+from django_example.movies.use_cases.retrieve_movies_use_case import RetrieveMoviesUseCase
+from django_example.users.permissions.is_admin_permission import IsAdminPermission
 
 
 class MovieAPIView(APIView):

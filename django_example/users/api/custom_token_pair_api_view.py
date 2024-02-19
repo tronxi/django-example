@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from users.persistence.custom_token_obtain_pair_serializer import CustomTokenObtainPairSerializer
+from django_example.users.persistence.custom_token_obtain_pair_serializer import CustomTokenObtainPairSerializer
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):

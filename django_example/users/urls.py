@@ -1,9 +1,9 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from users.api.custom_token_pair_api_view import CustomTokenObtainPairView
-from users.api.profile_api_view import ProfileAPIView
-from users.api.register_api_view import RegisterView
+from django_example.users.api.custom_token_pair_api_view import CustomTokenObtainPairView
+from django_example.users.api.profile_api_view import ProfileAPIView
+from django_example.users.api.register_api_view import RegisterView
 
 urlpatterns = [
     path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),

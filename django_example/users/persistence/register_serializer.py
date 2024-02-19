@@ -1,7 +1,7 @@
 from django.contrib.auth.models import Group
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from users.persistence.custom_user import CustomUser
+from django_example.users.persistence.custom_user import CustomUser
 
 
 class RegisterSerializer(serializers.ModelSerializer):

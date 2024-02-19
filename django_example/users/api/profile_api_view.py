@@ -1,7 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from users.persistence.profile_serializer import ProfileSerializer
+from django_example.users.persistence.profile_serializer import ProfileSerializer
 
 
 class ProfileAPIView(APIView):

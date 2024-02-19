@@ -1,6 +1,6 @@
 from django.http import Http404
 
-from movies.persistence.movie import Movie
+from django_example.movies.persistence.movie import Movie
 
 
 class DeleteMovieUseCase:

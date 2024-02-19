@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 
-from users.persistence.custom_user import CustomUser
-from users.persistence.register_serializer import RegisterSerializer
+from django_example.users.persistence.custom_user import CustomUser
+from django_example.users.persistence.register_serializer import RegisterSerializer
 
 
 class RegisterView(generics.CreateAPIView):

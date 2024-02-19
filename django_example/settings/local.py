@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
 
-    'users',
-    'movies'
+    'django_example.users',
+    'django_example.movies'
 ]
 
 SIMPLE_JWT = {
